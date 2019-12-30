@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>虚拟dom</title>
+    <style>
+        .item-head {
+            font-size: 30px;
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+    <div id='app'>
+
+    </div>
+    <script src="./vdom.js"></script>
+    <script>
+        let vnode = createElement('div', { id: 'app' }, [
+            createElement('p', { key: 1, style: { color: "blue" } }, '节点1'),
+            createElement('p', { key: 2, '@click': () => { alert('xx') } }, '节点2'),
+            createElement('p', { key: 3, 'class': "item-head" }, '节点3'),
+            createElement('p', { key: 4 }, '节点4')
+        ])
+        let vnode1 = createElement('div', { id: 'app' }, [
+            createElement('p', { key: 2, }, '节点2'),
+            createElement('p', { key: 1, style: { color: "red" } }, '节点1'),
+            createElement('p', { key: 3, 'class': "item-head" }, '节点3'),
+            createElement('p', { key: 5 }, '节点5'),
+            createElement('p', { key: 6, style: { 'color': '#2196f3' } }, '节点6'),
+        ])
+        render(vnode, document.getElementById('app'));
+        setTimeout(() => {
+            render(vnode1, document.getElementById('app'));
+        }, 1000)
+    </script>
+</body>
+
+</html>
